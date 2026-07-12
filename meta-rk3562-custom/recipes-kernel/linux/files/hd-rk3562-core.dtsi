@@ -1,0 +1,108 @@
+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+/*
+ * Vanxak HD-RK3562-CORE — minimal on-module peripherals only:
+ *   - LP4X DDR (initialized by SPL/ATF)
+ *   - eMMC (sdhci)
+ *   - fiq-debugger serial console (UART0 / ttyFIQ0)
+ *   - USB OTG0 for Maskrom/Loader upgrade
+ *
+ * Carrier-board peripherals (display, Ethernet, WiFi, etc.) are disabled here
+ * and should be enabled in a carrier-specific DTS overlay when needed.
+ */
+
+#include <dt-bindings/gpio/gpio.h>
+#include <dt-bindings/pinctrl/rockchip.h>
+
+/ {
+	chosen {
+		bootargs = "earlycon=uart8250,mmio32,0xff210000 console=ttyFIQ0,1500000n8 root=PARTUUID=614e0000-0000-4b53-8000-1d28000054a9 rootfstype=ext4 rw rootwait";
+	};
+
+	vcc5v0_sys: vcc5v0-sys {
+		compatible = "regulator-fixed";
+		regulator-name = "vcc5v0_sys";
+		regulator-always-on;
+		regulator-boot-on;
+		regulator-min-microvolt = <5000000>;
+		regulator-max-microvolt = <5000000>;
+	};
+
+	vcc_3v3: vcc-3v3 {
+		compatible = "regulator-fixed";
+		regulator-name = "vcc_3v3";
+		regulator-always-on;
+		regulator-boot-on;
+		regulator-min-microvolt = <3300000>;
+		regulator-max-microvolt = <3300000>;
+		vin-supply = <&vcc5v0_sys>;
+	};
+
+	vcc_1v8: vcc-1v8 {
+		compatible = "regulator-fixed";
+		regulator-name = "vcc_1v8";
+		regulator-always-on;
+		regulator-boot-on;
+		regulator-min-microvolt = <1800000>;
+		regulator-max-microvolt = <1800000>;
+		vin-supply = <&vcc5v0_sys>;
+	};
+};
+
+&sdhci {
+	bus-width = <8>;
+	cap-mmc-highspeed;
+	mmc-hs200-1_8v;
+	no-sd;
+	no-sdio;
+	non-removable;
+	status = "okay";
+};
+
+&u2phy {
+	status = "okay";
+};
+
+&u2phy_otg {
+	status = "okay";
+};
+
+&usbdrd_dwc3 {
+	dr_mode = "peripheral";
+	status = "okay";
+};
+
+&sdmmc0 {
+	status = "disabled";
+};
+
+&sdmmc1 {
+	status = "disabled";
+};
+
+&dsi {
+	status = "disabled";
+};
+
+&video_phy {
+	status = "disabled";
+};
+
+&gmac0 {
+	status = "disabled";
+};
+
+&gmac1 {
+	status = "disabled";
+};
+
+&route_dsi {
+	status = "disabled";
+};
+
+&rgb {
+	status = "disabled";
+};
+
+&route_rgb {
+	status = "disabled";
+};

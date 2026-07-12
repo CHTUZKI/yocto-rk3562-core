@@ -1,0 +1,24 @@
+# 初始化环境
+source poky/oe-init-build-env build
+
+# 构建最小镜像
+bitbake rk3562-image-minimal-emmc
+
+# 构建 GUI 镜像（Qt5 + Python3）
+bitbake rk3562-image-gui-emmc
+
+# 清理后重建
+bitbake -c cleansstate rk3562-image-minimal-emmc && bitbake rk3562-image-minimal-emmc
+
+# 单独重建内核
+bitbake -c cleansstate linux-rockchip && bitbake linux-rockchip
+
+# 单独重建 U-Boot
+bitbake -c cleansstate u-boot-rockchip && bitbake u-boot-rockchip
+
+# 查看层配置
+bitbake-layers show-layers
+
+# 查看机器配置
+bitbake-getvar MACHINE
+bitbake-getvar DISTRO

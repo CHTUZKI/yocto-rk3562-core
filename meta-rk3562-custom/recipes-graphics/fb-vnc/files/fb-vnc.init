@@ -1,0 +1,32 @@
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides:          fb-vnc
+# Required-Start:    $local_fs rk3562-display-init
+# Required-Stop:     $local_fs
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Framebuffer VNC screen mirror with remote touch
+### END INIT INFO
+
+DAEMON=/usr/sbin/fb-vnc.sh
+
+case "$1" in
+start)
+	echo "Starting fb-vnc..."
+	"$DAEMON" start
+	;;
+stop)
+	echo "Stopping fb-vnc..."
+	"$DAEMON" stop
+	;;
+restart|force-reload)
+	$0 stop
+	$0 start
+	;;
+*)
+	echo "Usage: $0 {start|stop|restart}"
+	exit 1
+	;;
+esac
+
+exit 0

@@ -1,0 +1,4 @@
+# Static address on the board side of the USB RNDIS link.
+# Configure the PC USB network adapter as 192.168.7.1/24.
+USB_IP=192.168.7.2
+USB_NETMASK=255.255.255.0

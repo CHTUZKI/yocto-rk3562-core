@@ -1,0 +1,8 @@
+# WIC layout for RK3562 eMMC/SD (SPL + FIT boot chain)
+# idblock + uboot (FIT includes trust) + boot + rootfs
+
+bootloader --ptable gpt
+part --source rawcopy --sourceparams="file=idblock.img" --align 32 --no-table
+part --source rawcopy --sourceparams="file=uboot.img" --part-name uboot --offset 4M
+part --source rawcopy --sourceparams="file=boot.img" --part-name boot --align 4
+part / --source rootfs --fstype ${RK_ROOTFS_TYPE} --part-name rootfs --uuid ${RK_ROOTDEV_UUID} --mkfs-extraopts "${RK_ROOTFS_EXTRAOPTS}" --align 8192

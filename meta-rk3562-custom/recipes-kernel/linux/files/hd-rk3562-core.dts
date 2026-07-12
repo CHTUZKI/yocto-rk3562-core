@@ -1,0 +1,17 @@
+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+/*
+ * Vanxak HD-RK3562-CORE module (LP4X + eMMC)
+ *
+ * Top-level device tree. Board details live in hd-rk3562-core.dtsi.
+ */
+
+/dts-v1/;
+
+#include "rk3562.dtsi"
+#include "rk3562-linux.dtsi"
+#include "hd-rk3562-core.dtsi"
+
+/ {
+	model = "Vanxak HD-RK3562-CORE";
+	compatible = "vanxak,hd-rk3562-core", "rockchip,rk3562";
+};
