@@ -1,0 +1,118 @@
+xuning@DESKTOP-JKHRNDR:~/yocto-rk3562-core/build$ cd /home/xuning/yocto-rk3562-core
+source poky/oe-init-build-env build
+bitbake rk3562-image-gui-emmc
+This is the default build configuration for the Poky reference distribution.
+
+### Shell environment set up for builds. ###
+
+You can now run 'bitbake <target>'
+
+Common targets are:
+    core-image-minimal
+    core-image-full-cmdline
+    core-image-sato
+    core-image-weston
+    meta-toolchain
+    meta-ide-support
+
+You can also run generated qemu images with a command like 'runqemu qemux86-64'.
+
+Other commonly useful commands are:
+ - 'devtool' and 'recipetool' handle common recipe tasks
+ - 'bitbake-layers' handles common layer tasks
+ - 'oe-pkgdata-util' handles common target package tasks
+Loading cache: 100% |########################################################################| Time: 0:00:03
+Loaded 4426 entries from dependency cache.
+Parsing recipes: 100% |######################################################################| Time: 0:00:02
+Parsing of 2566 .bb files complete (2563 cached, 3 parsed). 4430 targets, 121 skipped, 2 masked, 0 errors.
+NOTE: Resolving any missing task queue dependencies
+
+Build Configuration:
+BB_VERSION           = "2.8.0"
+BUILD_SYS            = "x86_64-linux"
+NATIVELSBSTRING      = "universal"
+TARGET_SYS           = "aarch64-poky-linux"
+MACHINE              = "hd-rk3562-core"
+DISTRO               = "poky"
+DISTRO_VERSION       = "5.0.9"
+TUNE_FEATURES        = "aarch64 crc cortexa53"
+TARGET_FPU           = ""
+meta-rk3562-custom   = "main:b2e34bb1e26a4e4261f9898b12938ba6ddc9a9db"
+meta-rockchip-updateimg = "main:0bb9fc26daca1c1363115a3e93da450dd716bbc8"
+meta-qt5             = "scarthgap:227cf5e7b64c93dfc1a45f235c466db8c3fd8707"
+meta
+meta-poky
+meta-yocto-bsp       = "HEAD:bab0f9f62af9af580744948dd3240f648a99879a"
+meta-oe
+meta-python          = "scarthgap:29a044218285fdc7fcdd63d5f0929cb3a27b6fed"
+
+Sstate summary: Wanted 657 Local 0 Mirrors 0 Missed 657 Current 2102 (0% match, 76% complete)| ETA:  0:00:00
+Initialising tasks: 100% |###################################################################| Time: 0:00:06
+NOTE: Executing Tasks
+WARNING: qtbase-5.15.13+git-r0 do_package_qa: QA Issue: File /usr/src/debug/qtbase/5.15.13+git/tests/auto/dbus/qdbusabstractinterface/qdbusabstractinterface/pinger_interface.cpp in package qtbase-src contains reference to TMPDIR
+File /usr/src/debug/qtbase/5.15.13+git/tests/auto/dbus/qdbusabstractinterface/qdbusabstractinterface/pinger_interface.h in package qtbase-src contains reference to TMPDIR [buildpaths]
+WARNING: qtdeclarative-5.15.13+git-r0 do_package_qa: QA Issue: File /usr/include/QtQml/5.15.13/QtQml/private/qqmljsparser_p.h in package qtdeclarative-dev contains reference to TMPDIR [buildpaths]
+WARNING: qtdeclarative-5.15.13+git-r0 do_package_qa: QA Issue: File /usr/lib/qtdeclarative/ptest/quicktestmainwithsetup/tst_quicktestmainwithsetup in package qtdeclarative-ptest contains reference to TMPDIR
+File /usr/lib/qtdeclarative/ptest/qqmllistreference/tst_qqmllistreference in package qtdeclarative-ptest contains reference to TMPDIR
+File /usr/lib/qtdeclarative/ptest/qdebugmessageservice/tst_qdebugmessageservice in package qtdeclarative-ptest contains reference to TMPDIR
+File /usr/lib/qtdeclarative/ptest/qqmlenginedebuginspectorintegrationtest/tst_qqmlenginedebuginspectorintegration in package qtdeclarative-ptest contains reference to TMPDIR
+File /usr/lib/qtdeclarative/ptest/qqmlmoduleplugin/tst_qqmlmoduleplugin in package qtdeclarative-ptest contains reference to TMPDIR
+File /usr/lib/qtdeclarative/ptest/rendernode/tst_rendernode in package qtdeclarative-ptest contains reference to TMPDIR
+File /usr/lib/qtdeclarative/ptest/qquickwidget/tst_qquickwidget in package qtdeclarative-ptest contains reference to TMPDIR
+File /usr/lib/qtdeclarative/ptest/signalspy/tst_signalspy in package qtdeclarative-ptest contains reference to TMPDIR
+File /usr/lib/qtdeclarative/ptest/qqmlenginedebugservice/tst_qqmlenginedebugservice in package qtdeclarative-ptest contains reference to TMPDIR
+File /usr/lib/qtdeclarative/ptest/qqmlerror/tst_qqmlerror in package qtdeclarative-ptest contains reference to TMPDIR
+File /usr/lib/qtdeclarative/ptest/qqmldebugjs/tst_qqmldebugjs in package qtdeclarative-ptest contains reference to TMPDIR
+File /usr/lib/qtdeclarative/ptest/qquickfolderlistmodel/tst_qquickfolderlistmodel in package qtdeclarative-ptest contains reference to TMPDIR
+File /usr/lib/qtdeclarative/ptest/qqmlfileselector/tst_qqmlfileselector in package qtdeclarative-ptest contains reference to TMPDIR
+File /usr/lib/qtdeclarative/ptest/qqmlxmlhttprequest/tst_qqmlxmlhttprequest in package qtdeclarative-ptest contains reference to TMPDIR
+File /usr/lib/qtdeclarative/ptest/qqmlprofilerservice/tst_qqmlprofilerservice in package qtdeclarative-ptest contains reference to TMPDIR
+File /usr/lib/qtdeclarative/ptest/qqmlpreview/tst_qqmlpreview in package qtdeclarative-ptest contains reference to TMPDIR
+File /usr/lib/qtdeclarative/ptest/qjsonbinding/tst_qjsonbinding in package qtdeclarative-ptest contains reference to TMPDIR
+File /usr/lib/qtdeclarative/ptest/qqmlmetaobject/tst_qqmlmetaobject in package qtdeclarative-ptest contains reference to TMPDIR
+File /usr/lib/qtdeclarative/ptest/qpacketprotocol/tst_qpacketprotocol in package qtdeclarative-ptest contains reference to TMPDIR
+File /usr/lib/qtdeclarative/ptest/polish/tst_polish in package qtdeclarative-ptest contains reference to TMPDIR
+File /usr/lib/qtdeclarative/ptest/qqmlengine/tst_qqmlengine in package qtdeclarative-ptest contains reference to TMPDIR
+File /usr/lib/qtdeclarative/ptest/qqmllocale/tst_qqmllocale in package qtdeclarative-ptest contains reference to TMPDIR
+File /usr/lib/qtdeclarative/ptest/qqmlincubator/tst_qqmlincubator in package qtdeclarative-ptest contains reference to TMPDIR
+File /usr/lib/qtdeclarative/ptest/qqmlinfo/tst_qqmlinfo in package qtdeclarative-ptest contains reference to TMPDIR
+File /usr/lib/qtdeclarative/ptest/qquickpixmapcache/tst_qquickpixmapcache in package qtdeclarative-ptest contains reference to TMPDIR
+File /usr/lib/qtdeclarative/ptest/qqmlmetatype/tst_qqmlmetatype in package qtdeclarative-ptest contains reference to TMPDIR
+File /usr/lib/qtdeclarative/ptest/drawingmodes/tst_drawingmodes in package qtdeclarative-ptest contains reference to TMPDIR
+File /usr/lib/qtdeclarative/ptest/qqmlnotifier/tst_qqmlnotifier in package qtdeclarative-ptest contains reference to TMPDIR
+File /usr/lib/qtdeclarative/ptest/qqmlcomponent/tst_qqmlcomponent in package qtdeclarative-ptest contains reference to TMPDIR
+File /usr/lib/qtdeclarative/ptest/qqmldebugtranslationservice/tst_qdebugtranslationservice in package qtdeclarative-ptest contains reference to TMPDIR
+File /usr/lib/qtdeclarative/ptest/qmllint/tst_qmllint in package qtdeclarative-ptest contains reference to TMPDIR
+File /usr/lib/qtdeclarative/ptest/qmlformat/tst_qmlformat in package qtdeclarative-ptest contains reference to TMPDIR
+File /usr/lib/qtdeclarative/ptest/qqmlconsole/tst_qqmlconsole in package qtdeclarative-ptest contains reference to TMPDIR
+File /usr/lib/qtdeclarative/ptest/qqmlstatemachine/tst_qqmlstatemachine in package qtdeclarative-ptest contains reference to TMPDIR
+File /usr/lib/qtdeclarative/ptest/qmlplugindump/tst_qmlplugindump in package qtdeclarative-ptest contains reference to TMPDIR
+File /usr/lib/qtdeclarative/ptest/qtqmlmodules/tst_qtqmlmodules in package qtdeclarative-ptest contains reference to TMPDIR
+File /usr/lib/qtdeclarative/ptest/qqmlenginecontrol/tst_qqmlenginecontrol in package qtdeclarative-ptest contains reference to TMPDIR
+File /usr/lib/qtdeclarative/ptest/qqmlinspector/tst_qqmlinspector in package qtdeclarative-ptest contains reference to TMPDIR
+File /usr/lib/qtdeclarative/ptest/qqmlsettings/tst_qqmlsettings in package qtdeclarative-ptest contains reference to TMPDIR
+File /usr/lib/qtdeclarative/ptest/testwithcomponents/tst_quicktestwithcomponents in package qtdeclarative-ptest contains reference to TMPDIR
+File /usr/lib/qtdeclarative/ptest/qqmldebuggingenabler/tst_qqmldebuggingenabler in package qtdeclarative-ptest contains reference to TMPDIR
+File /usr/lib/qtdeclarative/ptest/qqmlapplicationengine/tst_qqmlapplicationengine in package qtdeclarative-ptest contains reference to TMPDIR
+File /usr/lib/qtdeclarative/ptest/qqmlqt/tst_qqmlqt in package qtdeclarative-ptest contains reference to TMPDIR
+File /usr/lib/qtdeclarative/ptest/qqmlpromise/tst_qqmlpromise in package qtdeclarative-ptest contains reference to TMPDIR [buildpaths]
+ERROR: rk3562-image-gui-emmc-1.0-r0 do_image_complete: Recipe rk3562-image-gui-emmc is trying to install files into a shared area when those files already exist. The files and the manifests listing them are:
+  /home/xuning/yocto-rk3562-core/build/tmp/deploy/images/hd-rk3562-core/uboot.img
+    (matched in manifest-hd_rk3562_core-u-boot-rockchip.deploy)
+  /home/xuning/yocto-rk3562-core/build/tmp/deploy/images/hd-rk3562-core/loader.bin
+    (matched in manifest-hd_rk3562_core-u-boot-rockchip.deploy)
+  /home/xuning/yocto-rk3562-core/build/tmp/deploy/images/hd-rk3562-core/idblock.img
+    (matched in manifest-hd_rk3562_core-u-boot-rockchip.deploy)
+  /home/xuning/yocto-rk3562-core/build/tmp/deploy/images/hd-rk3562-core/boot.img
+    (matched in manifest-hd_rk3562_core-linux-rockchip.deploy)
+Please adjust the recipes so only one recipe provides a given file.
+ERROR: Logfile of failure stored in: /home/xuning/yocto-rk3562-core/build/tmp/work/hd_rk3562_core-poky-linux/rk3562-image-gui-emmc/1.0/temp/log.do_image_complete.3232308
+ERROR: Task (/home/xuning/yocto-rk3562-core/build/../meta-rk3562-custom/recipes-core/images/rk3562-image-gui-emmc.bb:do_image_complete) failed with exit code '1'
+NOTE: Tasks Summary: Attempted 5697 tasks of which 4883 didn't need to be rerun and 1 failed.
+
+Summary: 1 task failed:
+  /home/xuning/yocto-rk3562-core/build/../meta-rk3562-custom/recipes-core/images/rk3562-image-gui-emmc.bb:do_image_complete
+    log: /home/xuning/yocto-rk3562-core/build/tmp/work/hd_rk3562_core-poky-linux/rk3562-image-gui-emmc/1.0/temp/log.do_image_complete.3232308
+Summary: There were 3 WARNING messages.
+Summary: There was 1 ERROR message, returning a non-zero exit code.
+xuning@DESKTOP-JKHRNDR:~/yocto-rk3562-core/build$
