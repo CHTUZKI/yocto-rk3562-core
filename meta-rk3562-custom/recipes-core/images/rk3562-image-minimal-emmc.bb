@@ -13,8 +13,8 @@ IMAGE_INSTALL = " \
     ${CORE_IMAGE_EXTRA_INSTALL} \
 "
 
-IMAGE_INSTALL += "u-boot-rockchip neofetch packagegroup-rk3562-devtools drm-colorblocks touch-test \
-    linux-firmware-mt7601u wpa-supplicant iw wifi-autoconnect usb-rndis-gadget fb-vnc ssh-pregen-hostkeys \
+IMAGE_INSTALL += "u-boot-rockchip neofetch packagegroup-rk3562-devtools \
+    linux-firmware-mt7601u wpa-supplicant iw wifi-autoconnect usb-rndis-gadget ssh-pregen-hostkeys \
 "
 
 IMAGE_FEATURES += " \
@@ -36,8 +36,9 @@ RK_UPDATEIMG_SOC = "auto"
 RK_UPDATEIMG_FLASH_IDBLOCK = "1"
 RK_UPDATEIMG_PARAMETER_MODE = "manual"
 # RKDevTool 整包升级会跳过 :grow / 剩余空间分区，rootfs 必须写固定扇区数。
+# boot 分区须容纳 FIT boot.img（GUI 镜像约 41 MiB+）；Firefly RK3562 FIT 使用 0x40000 = 128 MiB。
 # IMAGE_ROOTFS_SIZE=2097152 KiB → rootfs.img 2 GiB → 0x400000 扇区 (512B)
-RK_UPDATEIMG_PARAMETER_CMDLINE = "mtdparts=rk29xxnand:0x00002000@0x00002000(uboot),0x00000800@0x00004000(misc),0x00010000@0x00004800(boot),0x00400000@0x00014800(rootfs)"
+RK_UPDATEIMG_PARAMETER_CMDLINE = "mtdparts=rk29xxnand:0x00002000@0x00002000(uboot),0x00000800@0x00004000(misc),0x00040000@0x00004800(boot),0x00400000@0x00044800(rootfs)"
 RK_UPDATEIMG_ROOTDEV = "PARTLABEL=rootfs"
 RK_UPDATEIMG_REQUIRED_IMAGES = "loader.bin idblock.img uboot.img boot.img misc.img rootfs.img"
 RK_UPDATEIMG_OPTIONAL_IMAGES = "trust.img"

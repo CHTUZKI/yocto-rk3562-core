@@ -40,14 +40,12 @@ do_kernel_metadata:prepend() {
 	# Force regenerating defconfig
 	rm -f ${UNPACKDIR}/defconfig
 
-	# Support defconfig fragments
+	# Support defconfig fragments (merge when missing or empty)
 	cd "${S}/arch/${ARCH}/configs"
-	if [ ! -f "${KBUILD_DEFCONFIG}" ]; then
-		DEFCONFIGS="rockchip_linux_defconfig ${RK_SOC_FAMILY}_linux.config"
-		[ "${KBUILD_DEFCONFIGS}" ] || KBUILD_DEFCONFIGS="$DEFCONFIGS"
-
+	if [ ! -s "${KBUILD_DEFCONFIG}" ]; then
+		rm -f "${KBUILD_DEFCONFIG}"
 		echo "Merging ${KBUILD_DEFCONFIGS} into ${KBUILD_DEFCONFIG}..."
-		cat ${KBUILD_DEFCONFIGS:-$CONFIGS} > ${KBUILD_DEFCONFIG} || true
+		cat ${KBUILD_DEFCONFIGS} > "${KBUILD_DEFCONFIG}"
 	fi
 	cd -
 }

@@ -1,24 +1,108 @@
-# 初始化环境
+# ============================================
+# 环境初始化（每次新开终端先执行）
+# ============================================
+cd /home/xuning/yocto-rk3562-core
 source poky/oe-init-build-env build
 
-# 构建最小镜像
-bitbake rk3562-image-minimal-emmc
-
-# 构建 GUI 镜像（Qt5 + Python3）
+# ============================================
+# 标准构建（改软件包 / rootfs / bbappend 后常用）
+# ============================================
+cd /home/xuning/yocto-rk3562-core
+source poky/oe-init-build-env build
+bitbake rk3562-image-gui-emmc -c clean
 bitbake rk3562-image-gui-emmc
 
-# 清理后重建
-bitbake -c cleansstate rk3562-image-minimal-emmc && bitbake rk3562-image-minimal-emmc
+# ============================================
+# 切换内核 / U-Boot / 设备树后建议全量清理
+# ============================================
+cd /home/xuning/yocto-rk3562-core
+source poky/oe-init-build-env build
+bitbake linux-rockchip -c cleansstate
+bitbake linux-libc-headers -c cleansstate
+bitbake u-boot-rockchip -c cleansstate
+bitbake rk3562-image-gui-emmc -c clean
+bitbake rk3562-image-gui-emmc
 
-# 单独重建内核
-bitbake -c cleansstate linux-rockchip && bitbake linux-rockchip
+# ============================================
+# 单独重建 U-Boot（改 DDR 配置、SPL、defconfig 等）
+# ============================================
+cd /home/xuning/yocto-rk3562-core
+source poky/oe-init-build-env build
+bitbake u-boot-rockchip -c cleansstate
+bitbake u-boot-rockchip
+bitbake rk3562-image-gui-emmc -c clean
+bitbake rk3562-image-gui-emmc
 
-# 单独重建 U-Boot
-bitbake -c cleansstate u-boot-rockchip && bitbake u-boot-rockchip
+# ============================================
+# 单独重建内核（含设备树 hd-rk3562-core.dtb）
+# ============================================
+cd /home/xuning/yocto-rk3562-core
+source poky/oe-init-build-env build
+bitbake linux-rockchip -c cleansstate
+bitbake linux-rockchip
+bitbake rk3562-image-gui-emmc -c clean
+bitbake rk3562-image-gui-emmc
 
-# 查看层配置
+# ============================================
+# 同时重建 U-Boot + 内核（大改 BSP 后）
+# ============================================
+cd /home/xuning/yocto-rk3562-core
+source poky/oe-init-build-env build
+bitbake u-boot-rockchip -c cleansstate
+bitbake u-boot-rockchip
+bitbake linux-rockchip -c cleansstate
+bitbake linux-rockchip
+bitbake rk3562-image-gui-emmc -c clean
+bitbake rk3562-image-gui-emmc
+
+# 设备树源文件：
+#   meta-rk3562-custom/recipes-kernel/linux/files/hd-rk3562-core.dts
+#   meta-rk3562-custom/recipes-kernel/linux/files/hd-rk3562-core.dtsi
+#   meta-rk3562-custom/recipes-kernel/linux/linux-rockchip_6.6.bbappend
+
+# ============================================
+# 清理镜像（不清理 sstate，下次编译较快）
+# ============================================
+cd /home/xuning/yocto-rk3562-core
+source poky/oe-init-build-env build
+bitbake rk3562-image-gui-emmc -c clean
+
+# ============================================
+# 可选：最小验证镜像（仅 boot/外设快速验证时用）
+# ============================================
+cd /home/xuning/yocto-rk3562-core
+source poky/oe-init-build-env build
+bitbake rk3562-image-minimal-emmc -c clean
+bitbake rk3562-image-minimal-emmc
+
+# ============================================
+# 构建产物路径
+# ============================================
+# build/tmp/deploy/images/hd-rk3562-core/
+#   update.img      — RKDevTool 整包烧录
+#   boot.img
+#   uboot.img
+#   idblock.img
+#   loader.bin
+#   *.wic             — 磁盘镜像
+
+# ============================================
+# 常用查询命令
+# ============================================
+cd /home/xuning/yocto-rk3562-core
+source poky/oe-init-build-env build
 bitbake-layers show-layers
-
-# 查看机器配置
 bitbake-getvar MACHINE
 bitbake-getvar DISTRO
+
+# ============================================
+# 故障排查：do_package 报 tar / openat2 / Bad address
+# （WSL2 或较新宿主 tar 1.34+ 常见）
+# ============================================
+# 项目已通过 meta-rk3562-custom 将 pseudo 升级到 1.9.3 修复。
+# 若仍失败，先重建 pseudo-native 再重试：
+cd /home/xuning/yocto-rk3562-core
+source poky/oe-init-build-env build
+bitbake pseudo-native -c cleansstate
+bitbake pseudo-native
+bitbake linux-libc-headers -c package

@@ -22,12 +22,8 @@ LINUX_VERSION ?= "6.6"
 
 SRC_URI:append = " \
     file://${THISDIR}/files/ext4.cfg \
-    file://${THISDIR}/files/display.cfg \
     file://${THISDIR}/files/wifi_usb.cfg \
-    file://${THISDIR}/files/gt911.cfg \
-    file://${THISDIR}/files/goodix-keep-panel-resolution.patch \
     file://${THISDIR}/files/usb-rndis.cfg \
-    file://${THISDIR}/files/input-uinput.cfg \
 "
 
 COMPATIBLE_MACHINE = "hd-rk3562-.*"

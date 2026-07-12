@@ -1,9 +1,0 @@
-# Framebuffer VNC — connect VNC viewer to <board-ip>:5900
-FB_DEV=/dev/fb0
-VNC_PORT=5900
-VNC_WIDTH=1024
-VNC_HEIGHT=600
-# 10-15 fps is enough for Qt HMI; lower = less CPU on RK3506
-VNC_FPS=12
-# Inject VNC pointer as uinput absolute mouse (Qt evdevmouse on x11vnc event node)
-VNC_TOUCH=1

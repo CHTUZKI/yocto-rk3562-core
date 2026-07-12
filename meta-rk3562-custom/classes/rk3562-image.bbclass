@@ -5,9 +5,6 @@ export RK_PARTITION_GROW ?= "1"
 
 ROCKCHIP_KERNEL_IMAGES = "1"
 
-# misc.img is identical empty padding; multiple image recipes share DEPLOY_DIR_IMAGE.
-SSTATE_ALLOW_OVERLAP_FILES += "${DEPLOY_DIR_IMAGE}/misc.img"
-
 IMAGE_POSTPROCESS_COMMAND:append = " link_latest_image;"
 link_latest_image() {
     rm -rf "${TOPDIR}/latest"

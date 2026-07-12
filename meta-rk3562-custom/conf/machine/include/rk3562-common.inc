@@ -13,15 +13,16 @@ PREFERRED_VERSION_linux-rockchip ?= "6.6%"
 # Rockchip SoC
 RK_SOC_FAMILY = "rk3562"
 RK_UBOOT_SPL = "1"
+KBUILD_DEFCONFIG = "hd-rk3562-core_defconfig"
 KBUILD_DEFCONFIGS = "rockchip_linux_defconfig rk3562.config"
+
+# RK3562 U-Boot is AArch32-only (arch/arm); Linux runs AArch64.
+UBOOT_ARCH = "arm"
 
 # Rockchip fiq-debugger (ttyFIQ0) 默认 1500000；PC 串口工具须设相同波特率
 SERIAL_CONSOLES = "1500000;ttyFIQ0"
 
-# x11vnc -rawfb needs fbdev in DISTRO_FEATURES (no X11 on this platform).
-DISTRO_FEATURES:append = " fbdev"
-
-# No framebuffer/virtual VT on this module; avoid respawning getty on missing /dev/tty1
+# No virtual VT on headless core module; avoid respawning getty on missing /dev/tty1
 USE_VT = "0"
 
 # Kernel (aarch64)
